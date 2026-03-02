@@ -1,0 +1,182 @@
+@import 'colors';
+@import 'layout';
+@import 'mediaqueries';
+
+@if $UIRefresh2022 {
+  body.upload-page {
+    background: linear-gradient(180deg, $mist-light 0%, $white 65%);
+  }
+
+  body.upload-page main {
+    padding-bottom: 96px;
+  }
+
+  body.upload-page .helper-description p {
+    text-align: center;
+    color: $wave;
+  }
+
+  .upload-card {
+    @include eight-column-layout-margin;
+    background: $white;
+    border: 1px solid $mist-s20;
+    border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(22, 60, 77, 0.12);
+    padding: 24px 18px;
+    margin-top: 20px;
+
+    @include media-query-medium {
+      padding: 32px 28px;
+    }
+  }
+
+  .upload-card__title {
+    text-align: center;
+    margin: 0 0 8px;
+  }
+
+  .upload-card__subtitle {
+    text-align: center;
+    margin: 0 0 24px;
+    color: $mist-s30;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .upload-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.95em;
+    color: $wave;
+    background: $mist-light;
+    border: 1px solid $mist-s10;
+    border-radius: 10px;
+    padding: 2px 8px;
+    display: inline-block;
+  }
+
+  .upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .upload-form input[type='submit'] {
+    background-color: $wave;
+    color: $white;
+    font-size: 20px;
+    font-family: inherit;
+    line-height: 24px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 10px 26px rgba(22, 60, 77, 0.18);
+    transition:
+      transform 0.08s ease,
+      box-shadow 0.08s ease,
+      background-color 0.15s ease;
+  }
+
+  .upload-form input[type='submit']:hover {
+    background-color: $flamingo-s40;
+    box-shadow: 0 14px 34px rgba(22, 60, 77, 0.22);
+  }
+
+  .upload-form input[type='submit']:active {
+    transform: translateY(1px);
+  }
+
+  .upload-form input[type='file'] {
+    width: min(560px, 100%);
+    background: $white;
+    border: 1px solid $mist-s20;
+    border-radius: 999px;
+    padding: 10px 16px;
+    color: $wave;
+  }
+
+  .upload-form input[type='file']::file-selector-button {
+    background: transparent;
+    color: $wave;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .upload-form input[type='file']::file-selector-button:hover {
+    background: rgba(22, 60, 77, 0.06);
+  }
+
+  .upload-links {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 6px;
+  }
+
+  #upload-status {
+    width: min(560px, 100%);
+    margin: 18px auto 0;
+  }
+
+  .upload-status {
+    background: $white;
+    border: 1px solid $mist-s10;
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    box-shadow: 0 10px 26px rgba(22, 60, 77, 0.12);
+  }
+
+  .upload-status--error {
+    border-color: $flamingo-s40;
+  }
+
+  .upload-status__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .upload-status--success .upload-status__icon {
+    background-color: rgba(107, 158, 120, 0.12);
+    color: $jade;
+  }
+
+  .upload-status--error .upload-status__icon {
+    background-color: rgba(189, 66, 87, 0.12);
+    color: $flamingo-s40;
+  }
+
+  .upload-status__body {
+    flex: 1;
+  }
+
+  .upload-status p {
+    margin: 0;
+  }
+
+  .upload-status p + p {
+    margin-top: 8px;
+  }
+
+  .upload-status__title {
+    font-weight: 600;
+  }
+
+  .upload-status__links {
+    font-size: 0.95rem;
+  }
+}
