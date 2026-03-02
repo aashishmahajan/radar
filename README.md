@@ -282,3 +282,9 @@ To run End to End tests, start the dev server and follow the required steps belo
      $ docker run -p 8080:8080 -v $PWD:/app -w /app -it node:18 /bin/sh -c 'npm install && npm run dev'
 
 After building it will start on `localhost:8080`.
+
+### Example run:
+```
+  podman build --platform linux/arm64 -t radar:latest .
+  podman run --rm -p 8080:80 --platform linux/arm64 radar:latest
+```

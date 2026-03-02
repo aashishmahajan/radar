@@ -1,52 +1,53 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/images/favicon.ico" rel="icon" />
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha512-byor" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="/images/favicon.ico" rel="icon"/>
+    <link rel="preconnect" href="https://rsms.me/"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha512-byor"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet"/>
     <title>Upload file • Build your own Radar</title>
-  </head>
+</head>
 
-  <body class="upload-page">
-    <header class="input-sheet__logo">
-      <div>
+<body>
+<header class="input-sheet__logo">
+    <div>
         <span>Powered by</span>
-        <a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" alt="Thoughtworks logo" /></a>
-      </div>
-    </header>
-    <div class="hero-banner">
-      <div class="hero-banner__wrapper">
+        <a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" alt="Thoughtworks logo"/></a>
+    </div>
+</header>
+<div class="hero-banner">
+    <div class="hero-banner__wrapper">
         <h1 class="hero-banner__title-text">Build your own Radar</h1>
-      </div>
+    </div>
+</div>
+<main>
+    <div class="helper-description home-page">
+        <p>Upload a CSV or JSON file and use it instantly in your radar.</p>
     </div>
 
-    <main>
-      <div class="helper-description home-page">
-        <p>Upload a CSV or JSON file and use it instantly in your radar.</p>
-      </div>
+    <section class="upload-card">
 
-      <section class="upload-card">
         <h2 class="upload-card__title">Upload file</h2>
-        <p class="upload-card__subtitle">
+        <span class="loader-text">
+        <span class="upload-card__subtitle">
           We’ll save it under <span class="upload-mono">/files/</span> so you can load it from the home page.
-        </p>
-
+        </span>
+        </span>
         <form id="upload-form" class="upload-form">
-          <input type="file" id="upload-file" name="file" accept=".csv,.json,application/json,text/csv" required />
-          <input type="submit" value="Upload" />
-          <div class="upload-links">
-            <a href="/files/">Browse files</a>
-            <a href="/">Back to home</a>
-          </div>
+            <input type="file" id="upload-file" name="file" accept=".csv,.json,application/json,text/csv" required/>
+            <input type="submit" value="Upload"/>
+            <div class="upload-links">
+                <a href="/files/">Browse files</a>
+                <a href="/">Back to home</a>
+            </div>
         </form>
 
         <div id="upload-status"></div>
-      </section>
-    </main>
-  </body>
+    </section>
+</main>
+</body>
 </html>
