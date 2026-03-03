@@ -9,8 +9,6 @@
     "dev": "webpack-dev-server --mode development --config webpack.dev.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:e2e": "cypress open --env host=$TEST_URL",
-    "test:e2e-headless": "cypress run --browser chrome --record false --env host=$TEST_URL",
     "lint-prettier:check": "eslint . && prettier --check .",
     "lint-prettier:fix": "eslint . --fix && prettier --write .",
     "quality": "npm run lint-prettier:check && npm run test:coverage"
@@ -30,11 +28,9 @@
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
     "cssnano": "^6.0.1",
-    "cypress": "^13.3.1",
     "dotenv": "^16.3.1",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-jest": "^27.4.2",
     "expose-loader": "^4.1.0",
     "html-webpack-plugin": "^5.5.3",
@@ -43,7 +39,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^22.1.0",
     "mini-css-extract-plugin": "^2.7.6",
-    "mochawesome": "^7.1.3",
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^9.2.0",
     "prettier": "^3.0.3",
@@ -66,8 +61,6 @@
   },
   "standard": {
     "globals": [
-      "Cypress",
-      "cy",
       "XMLHttpRequest"
     ],
     "env": [

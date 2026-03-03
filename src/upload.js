@@ -1,10 +1,13 @@
 require('./common')
+const template = require('./radarTemplate.json')
+
+const TEMPLATE_FIELDS = Array.isArray(template) && template.length > 0 ? Object.keys(template[0]) : []
 
 function setStatus(el, html) {
   el.innerHTML = html
 }
 
-const REQUIRED_FIELDS = ['name', 'ring', 'quadrant', 'isNew', 'description']
+const REQUIRED_FIELDS = TEMPLATE_FIELDS.length ? TEMPLATE_FIELDS : ['name', 'ring', 'quadrant', 'isNew', 'description']
 
 function escapeHtml(s) {
   return String(s)
