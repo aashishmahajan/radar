@@ -329,6 +329,21 @@ const Factory = function () {
       const sheetName = getSheetName()
       sheet = GoogleSheet(paramId, sheetName)
       sheet.init().build()
+    } else if (featureToggles.UIRefresh2022) {
+      ;(async () => {
+        try {
+          const latestUrl = '/files/latest.json'
+          const res = await fetch(latestUrl, { method: 'HEAD' })
+          if (res.ok) {
+            sheet = JSONFile(latestUrl)
+            sheet.init().build()
+            return
+          }
+        } catch (e) {
+          // fall back to landing page
+        }
+        setDocumentTitle()
+      })()
     } else {
       if (!featureToggles.UIRefresh2022) {
         document.body.style.opacity = '1'
