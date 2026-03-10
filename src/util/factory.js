@@ -252,16 +252,42 @@ const JSONFile = function (url) {
       })
   }
 
-  var createBlips = function (data) {
+  var createBlips = async function (data) {
     try {
       var columnNames = Object.keys(data[0])
       var contentValidator = new ContentValidator(columnNames)
       contentValidator.verifyContent()
       contentValidator.verifyHeaders()
       var blips = _.map(data, new InputSanitizer().sanitize)
+
+      let title = FileName(url)
+      if (url.endsWith('latest.json')) {
+        try {
+          const res = await fetch(url, { method: 'HEAD' })
+          if (res.ok) {
+            const lastModified = res.headers.get('Last-Modified')
+            if (lastModified) {
+              const uploadedAt = new Date(lastModified)
+              const cstString = uploadedAt.toLocaleString('en-US', {
+                timeZone: 'America/Chicago',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+              })
+              title = `Latest (uploaded ${cstString} CST)`
+            }
+          }
+        } catch (e) {
+          // ignore and fall back to default title
+        }
+      }
+
       featureToggles.UIRefresh2022
-        ? plotRadarGraph(FileName(url), blips, 'JSON File', [])
-        : plotRadar(FileName(url), blips, 'JSON File', [])
+        ? plotRadarGraph(title, blips, 'JSON File', [])
+        : plotRadar(title, blips, 'JSON File', [])
     } catch (exception) {
       const invalidContentError = new InvalidContentError(ExceptionMessages.INVALID_JSON_CONTENT)
       plotErrorMessage(featureToggles.UIRefresh2022 ? invalidContentError : exception, 'json')
@@ -291,6 +317,8 @@ const FileName = function (url) {
   return url
 }
 
+const QueryParams = require('./queryParamProcessor')
+
 const Factory = function () {
   var self = {}
   var sheet
@@ -316,7 +344,11 @@ const Factory = function () {
       }
     })
 
-    const domainName = DomainName(window.location.search.substring(1))
+    const search = window.location.search.substring(1)
+    const domainName = DomainName(search)
+
+    const queryParams = QueryParams(search)
+    const skipLatest = queryParams.noLatest === '1' || queryParams.skipLatest === '1'
 
     const paramId = getDocumentOrSheetId()
     if (paramId && paramId.endsWith('.csv')) {
@@ -329,7 +361,7 @@ const Factory = function () {
       const sheetName = getSheetName()
       sheet = GoogleSheet(paramId, sheetName)
       sheet.init().build()
-    } else if (featureToggles.UIRefresh2022) {
+    } else if (featureToggles.UIRefresh2022 && !skipLatest) {
       ;(async () => {
         try {
           const latestUrl = '/files/latest.json'

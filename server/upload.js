@@ -76,9 +76,23 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  if (req.method !== 'POST' || req.url !== '/upload') {
+  const isUpload =
+    req.method === 'POST' && (req.url === '/upload' || req.url === '/upload-secure')
+
+  if (!isUpload) {
     sendJson(res, 404, { error: 'Not found' })
     return
+  }
+
+  const expectedToken = process.env.UPLOAD_TOKEN
+  const isSecureEndpoint = req.url === '/upload-secure'
+  if (isSecureEndpoint && expectedToken) {
+    const authHeader = req.headers['authorization'] || ''
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : null
+    if (!token || token !== expectedToken) {
+      sendJson(res, 401, { error: 'Unauthorized' })
+      return
+    }
   }
 
   const contentType = req.headers['content-type'] || ''
