@@ -141,8 +141,8 @@ window.addEventListener('DOMContentLoaded', function () {
       setStatus(
         status,
         `<div class="upload-status upload-status--error"><p>${escapeHtml(
-          String(err && err.message ? err.message : err),
-        )}</p></div>`,
+          String(err && err.message ? err.message : err)
+        )}</p></div>`
       )
       return
     }
@@ -165,7 +165,7 @@ window.addEventListener('DOMContentLoaded', function () {
                <a href="/files/" target="_blank" rel="noopener noreferrer">View all files</a>
              </p>
            </div>
-         </div>`,
+         </div>`
       )
       form.reset()
     } catch (err) {
@@ -177,9 +177,8 @@ window.addEventListener('DOMContentLoaded', function () {
              <p class="upload-status__title">Upload failed.</p>
              <p>${escapeHtml(String(err && err.message ? err.message : err))}</p>
            </div>
-         </div>`,
+         </div>`
       )
     }
   })
 })
-

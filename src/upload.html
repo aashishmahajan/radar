@@ -1,76 +1,77 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/images/favicon.ico" rel="icon" />
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha512-byor" crossorigin="anonymous" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/images/favicon.ico" rel="icon" />
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha512-byor" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet" />
+  <title>Upload file • Build your own Radar</title>
+</head>
 
-  <body class="upload-page">
-    <header class="input-sheet__logo">
-      <div>
-        <span>Powered by</span>
-        <a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" alt="Thoughtworks logo" /></a>
-      </div>
-    </header>
-    <div class="hero-banner">
-      <div class="hero-banner__wrapper">
-        <h1 class="hero-banner__title-text">Upload a Radar file</h1>
-      </div>
-    </div>
-    <main>
-      <section class="upload-card">
-        <h2 class="upload-card__title">Upload a CSV or JSON</h2>
-        <p class="upload-card__subtitle">
-          We will save your file under <span class="upload-mono">/files/</span> so you can load it from the home page.
-        </p>
-
-        <form id="upload-form" class="upload-form">
-          <input
-            type="file"
-            id="upload-file"
-            name="file"
-            accept=".csv,.json,application/json,text/csv"
-            required
-          />
-          <input type="submit" value="Upload" />
-        </form>
-
-        <div class="upload-links">
-          <a href="/" class="upload-link">Back to home</a>
-          <a href="/files/" target="_blank" rel="noopener noreferrer" class="upload-link">View all files</a>
-        </div>
-
-        <div id="upload-status"></div>
-      </section>
-    </main>
-    <footer class="home-page">
-      <div class="pdf-footer">
-        <div class="pdf-powered-by-text">
-          <span>Powered by</span>
-          <a href="https://www.thoughtworks.com">
-            <img class="pdf-tw-logo" src="/images/tw-logo.png" alt="logo" />
-          </a>
-          <div class="pdf-footer-title">Build your own Radar</div>
-          <a class="radar-link" id="generated-radar-link" href="https://radar.thoughtworks.com">
-            radar.thoughtworks.com
-          </a>
-        </div>
-      </div>
-      <p class="agree-terms">
-        Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. By using this service you agree to
-        <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks' terms of use</a>. You also agree to our
-        <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather,
-        use and protect any personal data contained in your public Google Sheet. This software is
-        <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and
-        self-hosting.
+<body class="upload-page">
+<header class="input-sheet__logo">
+  <div>
+    <span>Powered by</span>
+    <a href="https://www.thoughtworks.com"><img src="/images/tw-logo.png" alt="Thoughtworks logo" /></a>
+  </div>
+</header>
+<div class="hero-banner">
+  <div class="hero-banner__wrapper">
+    <h1 class="hero-banner__title-text">Upload a Radar file</h1>
+  </div>
+</div>
+<main>
+  <section class="upload-card">
+    <form id="upload-form" class="upload-form" novalidate>
+      <p class="hero-banner__subtitle-text">
+        Choose a CSV or JSON on this machine and we will save it under /files/ so you
+        can load it from the home page.
       </p>
-    </footer>
-  </body>
-</html>
+      <label for="upload-file" class="upload-form__label">Select a CSV or JSON file to build your radar</label>
+      <input
+        type="file"
+        id="upload-file"
+        name="file"
+        accept=".csv,.json,application/json,text/csv"
+        required
+        class="upload-form__file-input"
+      />
+      <button type="submit" class="upload-form__submit">Upload file</button>
+    </form>
 
+    <div id="upload-status" class="upload-status-container"></div>
+  </section>
+</main>
+<footer class="home-page upload-footer">
+  <div class="pdf-footer">
+    <div class="pdf-powered-by-text">
+      <span>Powered by</span>
+      <a href="https://www.thoughtworks.com">
+        <img class="pdf-tw-logo" src="/images/tw-logo.png" alt="logo" />
+      </a>
+      <div class="pdf-footer-title">Build your own Radar</div>
+      <a class="radar-link" id="generated-radar-link" href="https://radar.thoughtworks.com">
+        radar.thoughtworks.com
+      </a>
+    </div>
+  </div>
+  <div class="upload-footer__links">
+    <a href="/" class="upload-footer__link">Back to landing page</a>
+    <a href="/upload.html" class="upload-footer__link">Upload another file</a>
+    <a href="/files/" target="_blank" rel="noopener noreferrer" class="upload-footer__link">View all files</a>
+  </div>
+  <p class="agree-terms">
+    Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. By using this service you agree to
+    <a href="https://www.thoughtworks.com/radar/tos">Thoughtworks' terms of use</a>. You also agree to our
+    <a href="https://www.thoughtworks.com/privacy-policy">privacy policy</a>, which describes how we will gather,
+    use and protect any personal data contained in your public Google Sheet. This software is
+    <a href="https://github.com/thoughtworks/build-your-own-radar">open source</a> and available for download and
+    self-hosting.
+  </p>
+</footer>
+</body>
+</html>

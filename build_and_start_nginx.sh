@@ -14,5 +14,8 @@ mkdir -p files
 cp /src/build-your-own-radar/spec/end_to_end_tests/resources/localfiles/* ./files/
 cp /src/build-your-own-radar/default.template /etc/nginx/conf.d/default.conf
 
+echo "Starting upload server..."
+node /src/build-your-own-radar/upload-server.js &
+
 echo "Starting nginx server..."
 exec nginx -g 'daemon off;'
