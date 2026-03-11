@@ -786,6 +786,11 @@ const Radar = function (size, radar) {
       landingPageElements.forEach((elem) => {
         elem.style.display = 'none'
       })
+
+      const globalFooterLinks = document.querySelector('footer .upload-footer__links')
+      if (globalFooterLinks) {
+        globalFooterLinks.style.display = 'none'
+      }
     } else {
       plotRadarHeader()
       plotRadarFooter()

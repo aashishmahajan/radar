@@ -41,6 +41,19 @@
   gap: 1.25rem;
 }
 
+.upload-card__title {
+  margin: 0;
+}
+
+.upload-card__subtitle {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.upload-card__subtitle--secondary {
+  color: #d7d7d7;
+}
+
 .upload-form {
   display: flex;
   flex-direction: column;
@@ -56,6 +69,7 @@
   border-radius: 6px;
   border: 1px solid $mist-s20;
   background: $white;
+  width: 100%;
 }
 
 .upload-form__submit {
@@ -67,6 +81,12 @@
   color: $white;
   font-weight: 600;
   cursor: pointer;
+  font-family: $baseFontFamily;
+  font-size: 0.95rem;
+
+  &:hover {
+    background: darken($wave, 4%);
+  }
 }
 
 .upload-status-container {

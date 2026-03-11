@@ -21,6 +21,7 @@ async function redirectToLatestIfNeeded() {
 
     const url = new URL(window.location.href)
     url.searchParams.set('documentId', `${window.location.origin}${target}`)
+    url.searchParams.set('latest', '1')
     window.location.replace(url.toString())
   } catch {
     // best-effort only; ignore failures and fall back to normal flow

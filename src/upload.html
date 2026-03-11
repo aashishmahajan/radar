@@ -26,21 +26,24 @@
 </div>
 <main>
   <section class="upload-card">
-    <form id="upload-form" class="upload-form" novalidate>
-      <p class="hero-banner__subtitle-text">
-        Choose a CSV or JSON on this machine and we will save it under /files/ so you
-        can load it from the home page.
-      </p>
-      <label for="upload-file" class="upload-form__label">Select a CSV or JSON file to build your radar</label>
+    <h2 class="upload-card__title">Upload file</h2>
+    <p class="upload-card__subtitle">
+      Upload a CSV or JSON file and use it instantly in your radar.
+    </p>
+    <p class="upload-card__subtitle upload-card__subtitle--secondary">
+      We’ll save it under <span class="upload-mono">/files/</span> so you can load it from the home page.
+    </p>
+    <form id="upload-form" class="upload-form">
+      <label for="upload-file" class="upload-form__label">Choose a radar data file</label>
       <input
         type="file"
         id="upload-file"
         name="file"
+        class="upload-form__file-input"
         accept=".csv,.json,application/json,text/csv"
         required
-        class="upload-form__file-input"
       />
-      <button type="submit" class="upload-form__submit">Upload file</button>
+      <button type="submit" class="upload-form__submit">Upload and view radar</button>
     </form>
 
     <div id="upload-status" class="upload-status-container"></div>
@@ -60,9 +63,10 @@
     </div>
   </div>
   <div class="upload-footer__links">
-    <a href="/" class="upload-footer__link">Back to landing page</a>
-    <a href="/upload.html" class="upload-footer__link">Upload another file</a>
+    <a href="/" class="upload-footer__link">View landing page</a>
+    <a href="/upload.html" class="upload-footer__link">Upload a new file</a>
     <a href="/files/" target="_blank" rel="noopener noreferrer" class="upload-footer__link">View all files</a>
+    <a href="/?noLatest=1" class="upload-footer__link">Start a new radar</a>
   </div>
   <p class="agree-terms">
     Powered by <a href="https://www.thoughtworks.com"> Thoughtworks</a>. By using this service you agree to

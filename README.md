@@ -225,6 +225,18 @@ Make sure you have nodejs installed. You can run `nvm use` to use the version us
 - `npm run quality` - to run the linter and the unit tests
 - `npm run dev` - to run application in localhost:8080. This will watch the .js and .css files and rebuild on file changes
 
+### Local UI customizations (this fork)
+
+This fork includes a small set of UI/UX refinements on top of the upstream project:
+
+- Modernized the upload experience (`upload.html` + `base.scss`):
+  - Updated the upload card to use a clearer title, supporting copy, and a labeled file input.
+  - Replaced the legacy submit input with a primary “Upload and view radar” button using the 2022 visual language.
+  - Aligned footer actions across pages: **View landing page**, **Upload a new file**, **View all files**, **Start a new radar**.
+- Improved the radar header metadata (`banner.js` + `_herobanner.scss`):
+  - Display the radar name as the main title, with a compact subtitle and “File Updated …” metadata styled to match the refreshed hero banner.
+  - Ensure the metadata truncates gracefully on smaller screens.
+
 ## End to End Tests
 
 To run End to End tests, start the dev server and follow the required steps below:

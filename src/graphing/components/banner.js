@@ -45,27 +45,49 @@ function formatBytes(bytes) {
   return `${rounded} ${units[i]}`
 }
 
+function isLatestContext() {
+  try {
+    const params = new URLSearchParams(window.location.search.substring(1))
+    return params.get('latest') === '1'
+  } catch {
+    return false
+  }
+}
+
 async function buildSourceMetadataText(sourceUrl) {
   if (!sourceUrl) return ''
 
+  // When coming from latest.json, prefer the uploadedAt metadata
+  if (isLatestContext()) {
+    try {
+      const res = await fetch('/files/latest.json', { method: 'GET' })
+      if (res.ok) {
+        const data = await res.json().catch(() => null)
+        const uploadedAt = data && data.uploadedAt
+        if (uploadedAt) {
+          const d = new Date(uploadedAt)
+          const label = Number.isNaN(d.getTime()) ? uploadedAt : d.toLocaleString()
+          return `Latest upload: ${label}`
+        }
+      }
+    } catch {
+      // fall through to best-effort HEAD request below
+    }
+  }
+
   const fileName = fileNameFromUrl(sourceUrl)
-  // const base = fileName ? `Source: ${fileName}` : `Source: ${sourceUrl}`
-  const lastModified =""
+  const lastModified = ''
+
   // Best-effort metadata (works for same-origin /files/ via nginx; may be blocked by CORS elsewhere)
   try {
     const res = await fetch(sourceUrl, { method: 'HEAD' })
-    const lastModified = res.headers.get('last-modified')
-    // const contentLength = res.headers.get('content-length')
+    const lm = res.headers.get('last-modified')
 
     const parts = []
-    if (lastModified) {
-      const d = new Date(lastModified)
-      parts.push(`File Updated: ${Number.isNaN(d.getTime()) ? lastModified : d.toLocaleString()}`)
+    if (lm) {
+      const d = new Date(lm)
+      parts.push(`File Updated: ${Number.isNaN(d.getTime()) ? lm : d.toLocaleString()}`)
     }
-    // if (contentLength) {
-    //   const size = formatBytes(contentLength)
-    //   if (size) parts.push(`Size: ${size}`)
-    // }
 
     return parts.length ? `${parts.join(' • ')}` : lastModified
   } catch {

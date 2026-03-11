@@ -68,16 +68,6 @@
           <input type="submit" value="Build my radar" />
           <a href="https://www.thoughtworks.com/radar/byor#guide">Need help?</a>
         </form>
-        <p class="helper-description__secondary">
-          Prefer a local file?
-          <a href="/upload">Upload a CSV or JSON from this server</a>.
-          <br />
-          View existing uploads:
-          <a href="/files/" target="_blank" rel="noopener noreferrer">Open /files in a new tab</a>.
-          <br />
-          Want to start fresh?
-          <a href="/?noLatest=1">Build a new radar</a>.
-        </p>
       </div>
       <div class="graph-header"></div>
       <div id="radar">
@@ -89,6 +79,12 @@
       <div class="graph-footer"></div>
     </main>
     <footer class="home-page">
+      <div class="upload-footer__links">
+        <a href="/" class="upload-footer__link">View landing page</a>
+        <a href="/upload.html" class="upload-footer__link">Upload a new file</a>
+        <a href="/files/" target="_blank" rel="noopener noreferrer" class="upload-footer__link">View all files</a>
+        <a href="/?noLatest=1" class="upload-footer__link">Start a new radar</a>
+      </div>
       <div class="pdf-footer">
         <div class="pdf-powered-by-text">
           <span>Powered by</span>

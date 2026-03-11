@@ -159,11 +159,6 @@ window.addEventListener('DOMContentLoaded', function () {
            <div class="upload-status__icon" aria-hidden="true">✓</div>
            <div class="upload-status__body">
              <p class="upload-status__title">Uploaded successfully.</p>
-             <p class="upload-status__links">
-               <a href="${href}" target="_blank" rel="noopener noreferrer">Open uploaded file</a>
-               •
-               <a href="/files/" target="_blank" rel="noopener noreferrer">View all files</a>
-             </p>
            </div>
          </div>`
       )

@@ -22,6 +22,7 @@ const GoogleAuth = require('./googleAuth')
 const config = require('../config')
 const featureToggles = config().featureToggles
 const { getDocumentOrSheetId, getSheetName } = require('./urlUtils')
+const QueryParams = require('./queryParamProcessor')
 const { getGraphSize, graphConfig, isValidConfig } = require('../graphing/config')
 const InvalidConfigError = require('../exceptions/invalidConfigError')
 const InvalidContentError = require('../exceptions/invalidContentError')
@@ -231,9 +232,10 @@ const CSVDocument = function (url) {
       contentValidator.verifyContent()
       contentValidator.verifyHeaders()
       var blips = _.map(data, new InputSanitizer().sanitize)
+      const title = isLatestDocumentContext() ? 'Latest' : FileName(url)
       featureToggles.UIRefresh2022
-        ? plotRadarGraph(FileName(url), blips, 'CSV File', [])
-        : plotRadar(FileName(url), blips, 'CSV File', [])
+        ? plotRadarGraph(title, blips, 'CSV File', [])
+        : plotRadar(title, blips, 'CSV File', [])
     } catch (exception) {
       const invalidContentError = new InvalidContentError(ExceptionMessages.INVALID_CSV_CONTENT)
       plotErrorMessage(featureToggles.UIRefresh2022 ? invalidContentError : exception, 'csv')
@@ -267,9 +269,10 @@ const JSONFile = function (url) {
       contentValidator.verifyContent()
       contentValidator.verifyHeaders()
       var blips = _.map(data, new InputSanitizer().sanitize)
+      const title = isLatestDocumentContext() ? 'Latest' : FileName(url)
       featureToggles.UIRefresh2022
-        ? plotRadarGraph(FileName(url), blips, 'JSON File', [])
-        : plotRadar(FileName(url), blips, 'JSON File', [])
+        ? plotRadarGraph(title, blips, 'JSON File', [])
+        : plotRadar(title, blips, 'JSON File', [])
     } catch (exception) {
       const invalidContentError = new InvalidContentError(ExceptionMessages.INVALID_JSON_CONTENT)
       plotErrorMessage(featureToggles.UIRefresh2022 ? invalidContentError : exception, 'json')
@@ -297,6 +300,11 @@ const FileName = function (url) {
     return match[1]
   }
   return url
+}
+
+function isLatestDocumentContext() {
+  const query = QueryParams(window.location.search.substring(1))
+  return query.latest === '1'
 }
 
 const Factory = function () {
