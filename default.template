@@ -6,6 +6,11 @@ server {
     index index.html;
   }
 
+  location = /upload {
+    root /opt/build-your-own-radar;
+    try_files /upload.html =404;
+  }
+
   # nginx default error page for 50x errors
   error_page 500 502 503 504 /50x.html;
   location = /50x.html {

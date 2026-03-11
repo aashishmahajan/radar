@@ -246,7 +246,8 @@ To run End to End tests, start the dev server and follow the required steps belo
 - To run end to end tests for public Google Sheets, the `CLIENT_ID` and `API_KEY` environment variables need to set as well (steps details [here](#more-complex-usage)), to provide Cypress with an authenticated session (without having to interact with Google's auth popups).
 
 ### Don't want to install node? Run with one line docker
-
-     $ docker run -p 8080:8080 -v $PWD:/app -w /app -it node:18 /bin/sh -c 'npm install && npm run dev'
-
+`
+podman build --platform linux/arm64 -t radar:latest .
+podman run --rm -p 8080:80 --platform linux/arm64 radar:latest
+`
 After building it will start on `localhost:8080`.

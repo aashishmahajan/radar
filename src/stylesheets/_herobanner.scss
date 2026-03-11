@@ -70,5 +70,35 @@
         width: 33%;
       }
     }
+
+    &__source-text {
+      margin-top: 0.35rem;
+      font-weight: 450;
+      font-size: 0.95rem;
+      opacity: 0.9;
+      width: 50%;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-height: 1.4rem;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+
+      @include media-query-medium {
+        width: 37.5%;
+        -webkit-line-clamp: 2;
+      }
+
+      @include media-query-large {
+        width: 25%;
+      }
+
+      @include media-query-xlarge {
+        width: 33%;
+      }
+    }
   }
 }

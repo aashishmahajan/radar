@@ -25,6 +25,12 @@ const plugins = [
     chunks: ['main'],
     inject: 'body',
   }),
+  new HtmlWebpackPlugin({
+    template: './src/upload.html',
+    filename: 'upload.html',
+    chunks: ['upload'],
+    inject: 'body',
+  }),
   new webpack.DefinePlugin({
     'process.env.CLIENT_ID': JSON.stringify(process.env.CLIENT_ID),
     'process.env.API_KEY': JSON.stringify(process.env.API_KEY),

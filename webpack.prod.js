@@ -10,6 +10,7 @@ const { graphConfig, uiConfig } = require('./src/graphing/config')
 
 const featureToggles = config().production.featureToggles
 const main = ['./src/site.js']
+const upload = ['./src/upload.js']
 const scssVariables = []
 
 Object.entries(graphConfig).forEach(function ([key, value]) {
@@ -26,7 +27,7 @@ Object.entries(featureToggles).forEach(function ([key, value]) {
 
 module.exports = merge(common, {
   mode: 'production',
-  entry: { main },
+  entry: { main, upload },
   performance: {
     hints: false,
   },
