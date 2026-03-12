@@ -11,6 +11,7 @@
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
+const crypto = require('crypto')
 
 const BOUNDARY_RE = /boundary=([^;]+)/i
 const UPLOAD_DIR = '/opt/build-your-own-radar/files'
@@ -27,6 +28,9 @@ function sendJson(res, status, payload) {
 
 function parseMultipart(headers, bodyBuffer) {
   const contentType = headers['content-type'] || headers['Content-Type'] || ''
+  if (!contentType.toLowerCase().includes('multipart/form-data')) {
+    throw new Error('Content-Type must be multipart/form-data')
+  }
   const match = BOUNDARY_RE.exec(contentType)
   if (!match) {
     throw new Error('Missing multipart boundary')
@@ -78,14 +82,19 @@ function handleUpload(req, res) {
       const targetPath = path.join(UPLOAD_DIR, safeName)
       fs.writeFileSync(targetPath, buffer)
 
+      const sha256 = crypto.createHash('sha256').update(buffer).digest('hex')
+      const uploadedAt = new Date().toISOString()
       const relPath = `/files/${safeName}`
       const latestPayload = {
         path: relPath,
-        uploadedAt: new Date().toISOString(),
+        uploadedAt,
+        sha256,
+        filename: safeName,
       }
       fs.writeFileSync(LATEST_PATH, JSON.stringify(latestPayload, null, 2))
 
-      sendJson(res, 200, latestPayload)
+      // 201 Created with details about stored file
+      sendJson(res, 201, latestPayload)
     } catch (err) {
       console.error('Upload failed:', err && err.stack ? err.stack : err)
       sendJson(res, 400, { error: err && err.message ? err.message : 'Upload failed' })
