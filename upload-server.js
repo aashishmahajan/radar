@@ -17,6 +17,42 @@ const BOUNDARY_RE = /boundary=([^;]+)/i
 const UPLOAD_DIR = '/opt/build-your-own-radar/files'
 const LATEST_PATH = path.join(UPLOAD_DIR, 'latest.json')
 
+function pad2(n) {
+  return String(n).padStart(2, '0')
+}
+
+function formatTimestampYYYYMMDDHHmm(date) {
+  const yyyy = date.getFullYear()
+  const mm = pad2(date.getMonth() + 1)
+  const dd = pad2(date.getDate())
+  const hh = pad2(date.getHours())
+  const min = pad2(date.getMinutes())
+  return `${yyyy}${mm}${dd}${hh}${min}`
+}
+
+function sanitizeBaseName(name) {
+  return String(name).replace(/[^a-zA-Z0-9._-]/g, '_')
+}
+
+function buildTimestampedName(originalFilename) {
+  const parsed = path.parse(path.basename(originalFilename))
+  const base = sanitizeBaseName(parsed.name || 'upload') || 'upload'
+  const ext = sanitizeBaseName(parsed.ext || '')
+  const ts = formatTimestampYYYYMMDDHHmm(new Date())
+  return `${base}_${ts}${ext}`
+}
+
+function uniqueNameInDir(dir, candidate) {
+  const parsed = path.parse(candidate)
+  let name = candidate
+  let counter = 2
+  while (fs.existsSync(path.join(dir, name))) {
+    name = `${parsed.name}_${counter}${parsed.ext}`
+    counter += 1
+  }
+  return name
+}
+
 function sendJson(res, status, payload) {
   const body = JSON.stringify(payload)
   res.writeHead(status, {
@@ -78,7 +114,8 @@ function handleUpload(req, res) {
         fs.mkdirSync(UPLOAD_DIR, { recursive: true })
       }
 
-      const safeName = filename.replace(/[^a-zA-Z0-9_.-]/g, '_') || `upload-${Date.now()}`
+      const candidateName = buildTimestampedName(filename || `upload-${Date.now()}`)
+      const safeName = uniqueNameInDir(UPLOAD_DIR, candidateName)
       const targetPath = path.join(UPLOAD_DIR, safeName)
       fs.writeFileSync(targetPath, buffer)
 
